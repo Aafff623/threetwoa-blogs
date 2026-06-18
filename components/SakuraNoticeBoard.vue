@@ -319,20 +319,20 @@ function stopAutoRotate() {
   }
 }
 
+// 避免 SSR 阶段随机选择文章导致 hydration mismatch：
+// 服务端固定从第 0 篇开始渲染，客户端挂载后再随机切换。
 watch(hasPosts, (available) => {
-  if (available) {
-    initRandomIndex()
-    startAutoRotate()
-  }
-  else {
+  if (!available) {
     stopAutoRotate()
     currentIndex.value = 0
   }
 }, { immediate: true })
 
 onMounted(() => {
-  if (hasPosts.value)
+  if (hasPosts.value) {
     initRandomIndex()
+    startAutoRotate()
+  }
 })
 
 onUnmounted(() => {
