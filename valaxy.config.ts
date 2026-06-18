@@ -35,6 +35,29 @@ export default defineValaxyConfig({
     tags: {
       rainbow: false,
     },
+
+    // 首页公告栏配置
+    notice: {
+      rotateInterval: 5000,
+      title: '公告栏',
+      sections: [
+        {
+          label: '--- 主域名 ---',
+          lines: [
+            'daily.yybb.us',
+            'hexo.yybb.us',
+          ],
+        },
+        {
+          label: '--- 备用域名 ---',
+          lines: [
+            'vercel.yybb.us',
+            'aiovtue.onrender.com',
+            'aiovtue.zeabur.app',
+          ],
+        },
+      ],
+    },
   },
 
   unocss: { safelist },
