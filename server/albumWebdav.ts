@@ -176,7 +176,7 @@ export interface AlbumWebDavListRequest {
 
 export async function handleAlbumWebDavList(body: AlbumWebDavListRequest) {
   assertAlbumAccess(parseAlbumAccessQuery(body))
-  const config = resolveWebDavConfig(body.slug)
+  const config = await resolveWebDavConfig(body.slug)
   const photos = await propfindWebDavAlbum(config)
   return { photos }
 }
@@ -195,7 +195,7 @@ export async function handleAlbumWebDavFile(
     throw new Error('缺少媒体地址')
 
   assertAlbumAccess(parseAlbumAccessQuery(accessQuery))
-  const config = resolveWebDavConfig(slug)
+  const config = await resolveWebDavConfig(slug)
   assertTargetInWebDavScope(targetUrl, config.url)
 
   const response = await fetchWebDavFile(targetUrl, config, { range })

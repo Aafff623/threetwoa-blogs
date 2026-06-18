@@ -1,7 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import type { Plugin } from 'vite'
-import { handleAlbumWebDavFile, handleAlbumWebDavList } from '../server/albumWebdav'
-import { loadAlbumWebDavEnv } from '../server/albumWebdavEnv'
 
 type IncomingMessageWithBody = IncomingMessage & { body?: unknown }
 
@@ -43,69 +41,10 @@ function parseAccessQuery(params: URLSearchParams) {
   }
 }
 
-async function handleAlbumWebDavRequest(req: IncomingMessageWithBody, res: ServerResponse) {
-  const pathname = (req.url || '').split('?')[0]
-
-  if (pathname === '/api/album-webdav/file') {
-    const parsed = new URL(req.url || '', 'http://localhost')
-    const slug = parsed.searchParams.get('slug') || ''
-    const target = parsed.searchParams.get('url')
-    const access = parseAccessQuery(parsed.searchParams)
-
-    if (!slug) {
-      sendJson(res, 400, { message: '缺少相册标识' })
-      return
-    }
-
-    if (!target) {
-      sendJson(res, 400, { message: '缺少媒体地址' })
-      return
-    }
-
-    const range = typeof req.headers.range === 'string' ? req.headers.range : undefined
-    const file = await handleAlbumWebDavFile(slug, target, access, range)
-    res.statusCode = file.status
-    res.setHeader('Content-Type', file.contentType)
-    res.setHeader('Accept-Ranges', 'bytes')
-    res.setHeader('Cache-Control', 'private, max-age=3600')
-    if (file.contentRange)
-      res.setHeader('Content-Range', file.contentRange)
-    if (file.contentLength)
-      res.setHeader('Content-Length', file.contentLength)
-    res.end(file.buffer)
-    return
-  }
-
-  if (pathname === '/api/album-webdav/list' && (req.method === 'GET' || req.method === 'POST')) {
-    let body: Record<string, string | undefined> = {}
-
-    if (req.method === 'GET') {
-      const parsed = new URL(req.url || '', 'http://localhost')
-      body = {
-        slug: parsed.searchParams.get('slug') || undefined,
-        encrypted: parsed.searchParams.get('encrypted') || undefined,
-        albumPassword: parsed.searchParams.get('albumPassword') || undefined,
-        accessPassword: parsed.searchParams.get('accessPassword') || undefined,
-      }
-    }
-    else {
-      body = await readJsonBody(req)
-    }
-
-    const result = await handleAlbumWebDavList({
-      slug: body.slug || '',
-      encrypted: body.encrypted,
-      albumPassword: body.albumPassword,
-      accessPassword: body.accessPassword,
-    })
-    sendJson(res, 200, result)
-    return
-  }
-
-  sendJson(res, 404, { message: 'Not found' })
-}
-
-function attachWebDavProxy(httpServer: NonNullable<import('vite').ViteDevServer['httpServer']>) {
+function attachWebDavProxy(
+  httpServer: NonNullable<import('vite').ViteDevServer['httpServer']>,
+  handleRequest: (req: IncomingMessageWithBody, res: ServerResponse) => Promise<void>,
+) {
   const listeners = httpServer.listeners('request')
 
   httpServer.removeAllListeners('request')
@@ -113,7 +52,7 @@ function attachWebDavProxy(httpServer: NonNullable<import('vite').ViteDevServer[
     const pathname = (req.url || '').split('?')[0]
 
     if (pathname.startsWith('/api/album-webdav')) {
-      handleAlbumWebDavRequest(req, res).catch((error) => {
+      handleRequest(req as IncomingMessageWithBody, res).catch((error) => {
         if (!res.headersSent) {
           sendJson(res, 500, {
             message: error instanceof Error ? error.message : 'WebDAV 代理失败',
@@ -131,13 +70,84 @@ function attachWebDavProxy(httpServer: NonNullable<import('vite').ViteDevServer[
 export function albumWebdavProxy(): Plugin {
   return {
     name: 'album-webdav-proxy',
-    configureServer(server) {
+    async configureServer(server) {
+      // 延迟加载服务端模块，避免在 valaxy.config.ts 解析阶段就要求
+      // server/albumWebdavPublicConfig.ts 已经存在（它由 album-webdav-config
+      // 插件在 buildStart / configureServer 中生成）。
+      const [{ handleAlbumWebDavFile, handleAlbumWebDavList }, { loadAlbumWebDavEnv }]
+        = await Promise.all([
+          import('../server/albumWebdav'),
+          import('../server/albumWebdavEnv'),
+        ])
+
       loadAlbumWebDavEnv(process.cwd())
       loadAlbumWebDavEnv(server.config.root)
 
+      async function handleAlbumWebDavRequest(req: IncomingMessageWithBody, res: ServerResponse) {
+        const pathname = (req.url || '').split('?')[0]
+
+        if (pathname === '/api/album-webdav/file') {
+          const parsed = new URL(req.url || '', 'http://localhost')
+          const slug = parsed.searchParams.get('slug') || ''
+          const target = parsed.searchParams.get('url')
+          const access = parseAccessQuery(parsed.searchParams)
+
+          if (!slug) {
+            sendJson(res, 400, { message: '缺少相册标识' })
+            return
+          }
+
+          if (!target) {
+            sendJson(res, 400, { message: '缺少媒体地址' })
+            return
+          }
+
+          const range = typeof req.headers.range === 'string' ? req.headers.range : undefined
+          const file = await handleAlbumWebDavFile(slug, target, access, range)
+          res.statusCode = file.status
+          res.setHeader('Content-Type', file.contentType)
+          res.setHeader('Accept-Ranges', 'bytes')
+          res.setHeader('Cache-Control', 'private, max-age=3600')
+          if (file.contentRange)
+            res.setHeader('Content-Range', file.contentRange)
+          if (file.contentLength)
+            res.setHeader('Content-Length', file.contentLength)
+          res.end(file.buffer)
+          return
+        }
+
+        if (pathname === '/api/album-webdav/list' && (req.method === 'GET' || req.method === 'POST')) {
+          let body: Record<string, string | undefined> = {}
+
+          if (req.method === 'GET') {
+            const parsed = new URL(req.url || '', 'http://localhost')
+            body = {
+              slug: parsed.searchParams.get('slug') || undefined,
+              encrypted: parsed.searchParams.get('encrypted') || undefined,
+              albumPassword: parsed.searchParams.get('albumPassword') || undefined,
+              accessPassword: parsed.searchParams.get('accessPassword') || undefined,
+            }
+          }
+          else {
+            body = await readJsonBody(req)
+          }
+
+          const result = await handleAlbumWebDavList({
+            slug: body.slug || '',
+            encrypted: body.encrypted,
+            albumPassword: body.albumPassword,
+            accessPassword: body.accessPassword,
+          })
+          sendJson(res, 200, result)
+          return
+        }
+
+        sendJson(res, 404, { message: 'Not found' })
+      }
+
       return () => {
         if (server.httpServer)
-          attachWebDavProxy(server.httpServer)
+          attachWebDavProxy(server.httpServer, handleAlbumWebDavRequest)
       }
     },
   }

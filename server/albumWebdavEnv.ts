@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import type { AlbumWebDavConfig } from '../types/album'
-import { getAlbumWebDavPublicConfig } from './albumWebdavPublicConfig'
 
 const loadedRoots = new Set<string>()
 
@@ -96,12 +95,13 @@ export function getWebDavPassword() {
   return process.env[WEBDAV_PASSWORD_ENV]
 }
 
-export function resolveWebDavConfig(slug: string): AlbumWebDavConfig {
+export async function resolveWebDavConfig(slug: string): Promise<AlbumWebDavConfig> {
   loadAlbumWebDavEnv()
 
   if (!slug)
     throw new Error('缺少相册标识')
 
+  const { getAlbumWebDavPublicConfig } = await import('./albumWebdavPublicConfig')
   const registered = getAlbumWebDavPublicConfig(slug)
   if (!registered?.url?.trim())
     throw new Error(`未找到 WebDAV 相册配置，请检查 pages/gallery/${slug}/index.md`)

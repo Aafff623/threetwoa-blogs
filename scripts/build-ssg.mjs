@@ -10,7 +10,7 @@ const BUILD_DONE_MARKERS = [
 const GRACE_MS = 1200
 const HEARTBEAT_MS = 45_000
 const MAX_MS = 20 * 60 * 1000
-const DIST_READY_TIMEOUT_MS = 60_000
+const DIST_READY_TIMEOUT_MS = 300_000
 const DIST_READY_POLL_MS = 500
 
 const require = createRequire(import.meta.url)
