@@ -175,6 +175,11 @@ const LOADER_SCRIPT = `<script>
 
       if (style)
         style.remove()
+
+      var foucStyle = document.getElementById('valaxy-fouc')
+
+      if (foucStyle)
+        foucStyle.remove()
     }, 300)
   }
 
