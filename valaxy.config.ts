@@ -1,6 +1,8 @@
 // import type { UserThemeConfig } from 'valaxy-theme-sakura'
 import { defineValaxyConfig } from 'valaxy'
 import { vaFoucLoader } from './plugins/va-fouc-loader'
+import { albumWebdavConfigPlugin } from './plugins/album-webdav-config'
+import { albumWebdavProxy } from './plugins/album-webdav-proxy'
 import siteConfig from './site.config'
 
 // add icons what you will need
@@ -11,6 +13,7 @@ const safelist = [
   'i-ri-folder-2-line',
   'i-ri-price-tag-3-line',
   'i-ri-user-smile-line',
+  'i-ri-gallery-line',
   'i-fa-file-text-o',
   'i-mdi-access-time',
 ]
@@ -104,6 +107,11 @@ export default defineValaxyConfig({
         icon: 'i-ri-price-tag-3-line',
       },
       {
+        text: '相册',
+        link: '/gallery',
+        icon: 'i-ri-gallery-line',
+      },
+      {
         text: '导航',
         link: '/navigation',
         icon: 'i-ri-compass-3-line',
@@ -139,7 +147,7 @@ export default defineValaxyConfig({
       title: siteConfig.title,
       subtitle: siteConfig.subtitle,
       primary: '#E9CCCC',
-    })],
+    }), albumWebdavConfigPlugin(), albumWebdavProxy()],
   },
 
   unocss: { safelist },

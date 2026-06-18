@@ -87,6 +87,27 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/gallery/': RouteRecordInfo<
+      '/gallery/',
+      '/gallery',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/gallery/demo/': RouteRecordInfo<
+      '/gallery/demo/',
+      '/gallery/demo',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/gallery/README': RouteRecordInfo<
+      '/gallery/README',
+      '/gallery/README',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/links/': RouteRecordInfo<
       '/links/',
       '/links',
@@ -201,6 +222,30 @@ declare module 'vue-router/auto-routes' {
     'pages/comment/index.md': {
       routes:
         | '/comment/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/gallery/index.md': {
+      routes:
+        | '/gallery/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/gallery/demo/index.md': {
+      routes:
+        | '/gallery/demo/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/gallery/README.md': {
+      routes:
+        | '/gallery/README'
       views:
         | never
       pathParamNames:
