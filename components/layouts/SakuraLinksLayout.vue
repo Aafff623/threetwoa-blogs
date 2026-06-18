@@ -82,6 +82,9 @@ const coverSrc = computed(() => {
     }
 
     &.has-cover {
+      position: sticky !important;
+      top: var(--sakura-navbar-height);
+      z-index: 0;
       height: 320px;
       margin-bottom: var(--links-page-header-gap);
       overflow: hidden;
@@ -112,6 +115,8 @@ const coverSrc = computed(() => {
   }
 
   .sakura-links-main {
+    position: relative;
+    z-index: 1;
     width: 100%;
     padding-inline: var(--links-page-outer);
     box-sizing: border-box;
