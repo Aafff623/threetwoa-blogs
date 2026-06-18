@@ -1,7 +1,7 @@
 ---
 title: 少写代码，多搭架构
-date: 2026-06-19
-updated: 2026-06-19
+date: 2026-06-19 12:00
+updated: 2026-06-19 12:00
 cover: /images/posts/code-less-architect-more.jpg
 categories: 技术思考
 tags:

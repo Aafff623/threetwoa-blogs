@@ -1,7 +1,7 @@
 ---
 title: 数字花园的搭建笔记
-date: 2026-06-19
-updated: 2026-06-19
+date: 2026-06-19 10:00
+updated: 2026-06-19 10:00
 cover: /images/posts/digital-garden.jpg
 categories: 站点搭建
 tags:

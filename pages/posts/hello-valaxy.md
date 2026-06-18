@@ -1,7 +1,7 @@
 ---
 title: Hello, Valaxy!
-date: 2026-06-18
-updated: 2026-06-18
+date: 2026-06-19 09:00
+updated: 2026-06-19 09:00
 cover: /images/posts/hello-valaxy.jpg
 categories: 站点搭建
 tags:

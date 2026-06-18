@@ -1,7 +1,7 @@
 ---
 title: 从 AI 提示词到可复用工作流
-date: 2026-06-19
-updated: 2026-06-19
+date: 2026-06-19 11:00
+updated: 2026-06-19 11:00
 cover: /images/posts/ai-workflow.jpg
 categories: AI 工作流
 tags:

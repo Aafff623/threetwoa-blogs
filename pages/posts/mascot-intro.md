@@ -1,7 +1,7 @@
 ---
 title: 认识一下本站吉祥物 —— Saku-chan
-date: 2026-06-19
-updated: 2026-06-19
+date: 2026-06-19 13:00
+updated: 2026-06-19 13:00
 cover: /images/mascot/saku-chan.png
 categories: 站点搭建
 tags:
