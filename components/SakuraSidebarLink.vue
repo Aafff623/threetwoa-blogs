@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useThemeConfig } from 'valaxy-theme-sakura/composables/index'
+import { useThemeConfig } from 'valaxy-theme-sakura/client'
 
 const props = defineProps<{
   sidebar?: any[]
