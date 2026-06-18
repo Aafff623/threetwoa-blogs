@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:ssg",
+    "build": "node scripts/build-ssg.mjs",
     "build:spa": "valaxy build",
-    "build:ssg": "valaxy build --ssg",
+    "build:ssg": "node scripts/build-ssg.mjs",
+    "build:ssg:raw": "valaxy build --ssg",
     "dev": "valaxy",
     "fuse": "valaxy fuse",
     "rss": "valaxy rss",

@@ -3,7 +3,7 @@
 <p align="center">
   <h1 align="center">threetwoa-blogs</h1>
   <p align="center"><em>A Valaxy static blog with Sakura theme and progressive UI enhancements</em></p>
-  <p align="center">基于 Valaxy + Sakura 主题的静态博客，包含分类/标签/归档图表、公告栏、随机文章、加载动画、图片灯箱、友链、网址导航、页脚倒计时、搜索修复等 8 个阶段的美化与功能增强</p>
+  <p align="center">基于 Valaxy + Sakura 主题的静态博客，包含分类/标签/归档图表、公告栏、随机文章、加载动画、图片灯箱、友链、网址导航、页脚倒计时、搜索修复、相册页面、构建卡死修复等 10 个阶段的美化与功能增强</p>
 </p>
 
 <p align="center">
@@ -69,6 +69,7 @@ Markdown 文章 → Valaxy 构建 → Vite/Vue SSG → 静态站点（GitHub Pag
 | **Stage 7** | 网址导航页面 | 站点导航 + 随机网站跳转抽卡 |
 | **Stage 8** | 页脚运行倒计时 + 搜索修复 | 实时显示站点运行时长，修复 Fuse 搜索初始化问题 |
 | **Stage 9** | 相册页面 + WebDAV 图源 | 本地图床相册与 WebDAV 云端相册，支持加密访问与时间轴展示 |
+| **Stage 10** | 构建卡死修复 | 通过 wrapper 脚本监控构建完成标记并主动结束进程 |
 **场景匹配：**
 
 | 方向 | threetwoa-blogs 如何匹配 |
@@ -201,7 +202,7 @@ pnpm serve
 | **Stage 1-7** | ✅ 完成 | 分类/标签/归档图表、公告栏、随机文章、加载动画、图片灯箱、友链、留言板、导航页 |
 | **Stage 8** | ✅ 完成 | 页脚运行倒计时、Fuse 搜索修复 |
 | **Stage 9** | ✅ 完成 | 相册页面，支持本地图床与 WebDAV 图源、加密访问、时间轴展示 |
-| **Stage 10** | 🔜 待规划 | 修复构建结束卡死问题 |
+| **Stage 10** | ✅ 完成 | 修复 SSG 构建结束卡死问题 |
 
 <p align="right">(<a href="#top">回到顶部</a>)</p>
 
@@ -226,6 +227,7 @@ pnpm serve
 
 | 阶段 | 日期 | 变更 |
 | ---- | ---- | ---- |
+| **Stage 10** | 2026-06-18 | 修复 SSG 构建结束卡死问题，通过 wrapper 脚本监控完成标记并结束进程 |
 | **Stage 9** | 2026-06-18 | 新增 `/gallery` 相册页面，支持本地图床与 WebDAV 云端相册、加密访问、时间轴展示 |
 | **Stage 8** | 2026-06-18 | 新增页脚运行倒计时，修复 Fuse 搜索初始化，新增 `/search` 页面 |
 | **Stage 7** | 2026-06-18 | 新增网址导航页面与随机网站跳转 |
