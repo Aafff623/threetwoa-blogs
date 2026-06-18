@@ -35,7 +35,7 @@ export default defineValaxyConfig({
     // 归档页样式：list 时间线 / chart 发布统计折线面积图
     archives: {
       style: 'chart',
-      startMonth: '2020-01',
+      startMonth: '2026-06',
     },
 
     // 标签页样式：list 按钮列表 / chart 柱状统计图
@@ -48,6 +48,14 @@ export default defineValaxyConfig({
       rainbow: false,
     },
 
+    // 首页 Hero 配置
+    hero: {
+      title: "threetwoa's digital garden",
+      motto: '记录代码、架构与 AI 工作流的数字花园。Code less, Architect more.',
+      urls: ['/images/hero/hero-bg.jpg'],
+      randomUrls: false,
+    },
+
     // 首页公告栏配置
     notice: {
       rotateInterval: 5000,
@@ -56,16 +64,14 @@ export default defineValaxyConfig({
         {
           label: '--- 主域名 ---',
           lines: [
-            'daily.yybb.us',
-            'hexo.yybb.us',
+            'threetwoa-blogs.vercel.app',
           ],
         },
         {
           label: '--- 备用域名 ---',
           lines: [
-            'vercel.yybb.us',
-            'aiovtue.onrender.com',
-            'aiovtue.zeabur.app',
+            'threetwoa-blogs-laiyif68-5443s-projects.vercel.app',
+            'threetwoa-blogs-git-master-laiyif68-5443s-projects.vercel.app',
           ],
         },
       ],
@@ -124,12 +130,12 @@ export default defineValaxyConfig({
     ],
 
     navbarOptions: {
-      title: ['Valaxy', 'Theme', 'Yun'],
+      title: ['threetwoa', 'digital', 'garden'],
       tools: ['toggleDark', 'toggleLocale', 'search'],
     },
 
     footer: {
-      runtimeSince: '2026-06-01',
+      runtimeSince: '2026-06-18',
     },
   },
 
