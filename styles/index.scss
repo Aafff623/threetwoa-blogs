@@ -1,0 +1,26 @@
+// you can custom css here
+
+/* 统计图容器：与文章卡片一致的背景与黑色描边，横向铺满视口并保留边距 */
+
+.sakura-stat-chart {
+  --chart-edge: max(20px, env(safe-area-inset-left, 0px));
+
+  box-sizing: border-box;
+  width: calc(100vw - 2 * var(--chart-edge));
+  max-width: none;
+  margin-inline: calc(50% - 50vw + var(--chart-edge));
+
+  border-radius: var(--sakura-post-card-rd, 12px);
+  background: var(--sakura-post-card-bg, var(--va-c-bg-soft));
+  border: 1px solid rgba(0, 0, 0, 0.85);
+}
+
+@media (min-width: 640px) {
+  .sakura-stat-chart {
+    --chart-edge: max(40px, env(safe-area-inset-left, 0px));
+  }
+}
+
+html.dark .sakura-stat-chart {
+  border-color: var(--sakura-color-divider, rgba(255, 255, 255, 0.2));
+}
