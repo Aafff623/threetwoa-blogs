@@ -1,5 +1,7 @@
 // import type { UserThemeConfig } from 'valaxy-theme-sakura'
 import { defineValaxyConfig } from 'valaxy'
+import { vaFoucLoader } from './plugins/va-fouc-loader'
+import siteConfig from './site.config'
 
 // add icons what you will need
 const safelist = [
@@ -58,6 +60,23 @@ export default defineValaxyConfig({
         },
       ],
     },
+  },
+
+  build: {
+    ssgForPagination: false,
+    foucGuard: {
+      enabled: true,
+      maxDuration: 5000,
+    },
+  },
+
+  vite: {
+    plugins: [vaFoucLoader({
+      avatar: siteConfig.author?.avatar,
+      title: siteConfig.title,
+      subtitle: siteConfig.subtitle,
+      primary: '#E9CCCC',
+    })],
   },
 
   unocss: { safelist },
