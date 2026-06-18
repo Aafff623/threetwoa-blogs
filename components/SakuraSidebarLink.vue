@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import type { NavItem } from 'valaxy-theme-sakura/types'
-import { useThemeConfig } from 'valaxy-theme-sakura/composables'
+import { useThemeConfig } from 'valaxy-theme-sakura/composables/index'
 
 const props = defineProps<{
-  sidebar?: NavItem[]
+  sidebar?: any[]
 }>()
 
 const themeConfig = useThemeConfig()
@@ -16,7 +15,7 @@ const marker = ref<HTMLElement | null>()
 const sidebar = computed(() =>
   props.sidebar
   || (Array.isArray(themeConfig.value.sidebar) && themeConfig.value.sidebar.length > 0 ? themeConfig.value.sidebar : themeConfig.value.navbar),
-) as unknown as NavItem[]
+) as unknown as any[]
 
 watch(() => route.path, () => nextTick(() => updateMarker()))
 
