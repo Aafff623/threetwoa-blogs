@@ -1,15 +1,17 @@
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
 const BUILD_DONE_MARKERS = [
   '[HOOK] build:after done',
   'RSS Feed Files',
 ]
-const GRACE_MS = 800
+const GRACE_MS = 1200
 const HEARTBEAT_MS = 45_000
 const MAX_MS = 20 * 60 * 1000
+const DIST_READY_TIMEOUT_MS = 60_000
+const DIST_READY_POLL_MS = 500
 
 const require = createRequire(import.meta.url)
 const valaxyBin = require.resolve('valaxy/bin/valaxy.mjs')
@@ -41,6 +43,48 @@ function killChildTree() {
     child.kill('SIGKILL')
   }
   catch {}
+}
+
+function isDistIndexReady() {
+  if (!existsSync(distIndex))
+    return false
+
+  try {
+    const html = readFileSync(distIndex, 'utf-8')
+    // 空模板时 #app 内无内容；SSG 完成后会注入组件和初始状态
+    return html.includes('__INITIAL_STATE__')
+      || html.includes('sakura-app-sidebar')
+      || html.includes('class="sakura-page')
+  }
+  catch {
+    return false
+  }
+}
+
+function waitForDistReady(callback) {
+  if (isDistIndexReady()) {
+    callback(true)
+    return
+  }
+
+  const start = Date.now()
+  const timer = setInterval(() => {
+    if (finished) {
+      clearInterval(timer)
+      return
+    }
+
+    if (isDistIndexReady()) {
+      clearInterval(timer)
+      callback(true)
+      return
+    }
+
+    if (Date.now() - start > DIST_READY_TIMEOUT_MS) {
+      clearInterval(timer)
+      callback(false)
+    }
+  }, DIST_READY_POLL_MS)
 }
 
 function finishSuccess() {
@@ -75,7 +119,15 @@ function finishError(code) {
 
 function scheduleSuccess() {
   clearTimeout(successTimer)
-  successTimer = setTimeout(finishSuccess, GRACE_MS)
+  // 匹配到完成标记后，等待 dist/index.html 真正写入 SSG 内容再结束
+  waitForDistReady((ready) => {
+    if (!ready) {
+      console.error('\n构建标记已触发，但 dist/index.html 未检测到 SSG 内容，请检查构建日志。\n')
+      finishError(1)
+      return
+    }
+    successTimer = setTimeout(finishSuccess, GRACE_MS)
+  })
 }
 
 function inspectOutput(text) {
@@ -121,8 +173,11 @@ child.on('error', (error) => {
 child.on('close', (code) => {
   if (finished)
     return
-  if (code === 0 || existsSync(distIndex))
-    finishSuccess()
-  else
-    finishError(code)
+  // 子进程已自然退出，再确认 dist 是否就绪
+  waitForDistReady((ready) => {
+    if (ready || (code === 0 && existsSync(distIndex)))
+      finishSuccess()
+    else
+      finishError(code)
+  })
 })
