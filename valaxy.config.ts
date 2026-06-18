@@ -6,6 +6,11 @@ import siteConfig from './site.config'
 // add icons what you will need
 const safelist = [
   'i-ri-home-line',
+  'i-ri-compass-3-line',
+  'i-ri-archive-line',
+  'i-ri-folder-2-line',
+  'i-ri-price-tag-3-line',
+  'i-ri-user-smile-line',
 ]
 
 /**
@@ -59,6 +64,58 @@ export default defineValaxyConfig({
           ],
         },
       ],
+    },
+
+    // 导航页「随机网站跳转」抽卡视频：weight 越大越容易抽到
+    navigation: {
+      randomDrawVideos: [
+        {
+          url: 'https://img.naixiai.cn/2026/06/09/_compressed.mp4',
+          weight: 1,
+        },
+        {
+          url: 'https://img.naixiai.cn/2026/06/09/_compresseddbc6ff3507fddbf4.mp4',
+          weight: 2,
+        },
+      ],
+    },
+
+    navbar: [
+      {
+        text: '首页',
+        link: '/',
+        icon: 'i-ri-home-line',
+      },
+      {
+        text: '归档',
+        link: '/archives',
+        icon: 'i-ri-archive-line',
+      },
+      {
+        text: '分类',
+        link: '/categories',
+        icon: 'i-ri-folder-2-line',
+      },
+      {
+        text: '标签',
+        link: '/tags',
+        icon: 'i-ri-price-tag-3-line',
+      },
+      {
+        text: '导航',
+        link: '/navigation',
+        icon: 'i-ri-compass-3-line',
+      },
+      {
+        text: '关于',
+        link: '/about',
+        icon: 'i-ri-user-smile-line',
+      },
+    ],
+
+    navbarOptions: {
+      title: ['Valaxy', 'Theme', 'Yun'],
+      tools: ['toggleDark', 'toggleLocale', 'search'],
     },
   },
 
