@@ -102,7 +102,10 @@ export function buildAlbumWebdavRequestUrl(input: {
 export async function albumWebdavHttpToNetlifyResult(response: Response) {
   const contentType = response.headers.get('content-type') || ''
   const isJson = contentType.includes('application/json')
-  const headers = Object.fromEntries(Array.from(response.headers))
+  const headers: Record<string, string> = {}
+  response.headers.forEach((value, key) => {
+    headers[key] = value
+  })
 
   if (isJson) {
     return {
