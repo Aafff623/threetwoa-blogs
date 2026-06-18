@@ -34,3 +34,8 @@ html.dark .sakura-stat-chart {
 html.image-gallery-open {
   overflow: hidden;
 }
+
+/* 修复首页单列布局被 .sakura-triple-columns-base 覆盖为 1fr 的问题 */
+.sakura-home-layout.sakura-one-columns {
+  grid-template-columns: minmax(0, 800px) !important;
+}
