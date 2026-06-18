@@ -80,6 +80,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/comment/': RouteRecordInfo<
+      '/comment/',
+      '/comment',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/links/': RouteRecordInfo<
       '/links/',
       '/links',
@@ -172,6 +179,14 @@ declare module 'vue-router/auto-routes' {
     'pages/categories/index.md': {
       routes:
         | '/categories/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/comment/index.md': {
+      routes:
+        | '/comment/'
       views:
         | never
       pathParamNames:
