@@ -24,3 +24,13 @@
 html.dark .sakura-stat-chart {
   border-color: var(--sakura-color-divider, rgba(255, 255, 255, 0.2));
 }
+
+/* 文章图片点击放大 */
+.markdown-body img,
+.prose img {
+  cursor: zoom-in;
+}
+
+html.image-gallery-open {
+  overflow: hidden;
+}

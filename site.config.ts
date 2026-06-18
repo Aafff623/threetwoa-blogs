@@ -93,6 +93,11 @@ export default defineSiteConfig({
     enable: false,
   },
 
+  // 关闭自带的图片预览
+  mediumZoom: {
+    enable: false,
+  },
+
   sponsor: {
     enable: true,
     title: '我很可爱，请给我钱！',
