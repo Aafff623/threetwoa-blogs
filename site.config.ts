@@ -90,7 +90,15 @@ export default defineSiteConfig({
   ],
 
   search: {
-    enable: false,
+    enable: true,
+    provider: 'fuse',
+  },
+
+  fuse: {
+    options: {
+      keys: ['title', 'tags', 'categories', 'excerpt', 'content'],
+      ignoreLocation: true,
+    },
   },
 
   // 关闭自带的图片预览

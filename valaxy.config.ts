@@ -11,6 +11,8 @@ const safelist = [
   'i-ri-folder-2-line',
   'i-ri-price-tag-3-line',
   'i-ri-user-smile-line',
+  'i-fa-file-text-o',
+  'i-mdi-access-time',
 ]
 
 /**
@@ -116,6 +118,10 @@ export default defineValaxyConfig({
     navbarOptions: {
       title: ['Valaxy', 'Theme', 'Yun'],
       tools: ['toggleDark', 'toggleLocale', 'search'],
+    },
+
+    footer: {
+      runtimeSince: '2026-06-01',
     },
   },
 

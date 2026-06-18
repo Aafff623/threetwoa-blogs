@@ -115,6 +115,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/search/': RouteRecordInfo<
+      '/search/',
+      '/search',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/tags/': RouteRecordInfo<
       '/tags/',
       '/tags',
@@ -226,6 +233,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/hello-valaxy.md': {
       routes:
         | '/posts/hello-valaxy'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/search/index.md': {
+      routes:
+        | '/search/'
       views:
         | never
       pathParamNames:
