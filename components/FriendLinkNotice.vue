@@ -5,7 +5,7 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<{
   siteshot?: string
 }>(), {
-  siteshot: 'https://picsum.photos/seed/friendcover/800/450',
+  siteshot: '/images/links/site1.jpg',
 })
 
 const siteConfig = useSiteConfig()

@@ -2,7 +2,7 @@
 layout: links
 title: 来加入我们叭
 icon: i-ri-links-line
-cover: https://picsum.photos/seed/valaxy-links/1200/400
+cover: /images/links/cover.jpg
 comment: true
 
 linkGroups:
@@ -15,7 +15,7 @@ linkGroups:
         blog: aiovtue's notion
         desc: 所爱隔山海，山海不可平
         color: "#0078e7"
-        siteshot: https://picsum.photos/seed/link1/800/450
+        siteshot: /images/links/site1.jpg
 
       - url: https://20030327.xyz
         avatar: https://r2tc.20030327.xyz/file/%E5%8D%9A%E5%AE%A2/%E4%B8%BB%E9%A2%98/1780643776417_1780643686584.png
@@ -23,7 +23,7 @@ linkGroups:
         blog: AIOVTUE
         desc: 雨是神的烟花
         color: "#0078e7"
-        siteshot: https://picsum.photos/seed/link2/800/450
+        siteshot: /images/links/site2.jpg
 
   - name: 推荐网站
     desc: 这里是最熟悉的小伙伴
