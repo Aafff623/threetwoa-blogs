@@ -85,6 +85,7 @@ const noticeSections = computed(() => {
   }))
 })
 const hasPosts = computed(() => posts.value.length > 0)
+const isMounted = ref(false)
 
 const currentIndex = ref(0)
 const dotTrackRef = ref<HTMLElement | null>(null)
@@ -319,8 +320,8 @@ function stopAutoRotate() {
   }
 }
 
-// 避免 SSR 阶段随机选择文章导致 hydration mismatch：
-// 服务端固定从第 0 篇开始渲染，客户端挂载后再随机切换。
+// 避免 SSR 阶段与客户端首屏渲染不一致导致 hydration mismatch：
+// 文章轮播只在客户端挂载后再渲染，挂载完成后再随机选择并启动自动轮播。
 watch(hasPosts, (available) => {
   if (!available) {
     stopAutoRotate()
@@ -329,6 +330,7 @@ watch(hasPosts, (available) => {
 }, { immediate: true })
 
 onMounted(() => {
+  isMounted.value = true
   if (hasPosts.value) {
     initRandomIndex()
     startAutoRotate()
@@ -376,7 +378,7 @@ onUnmounted(() => {
     </div>
 
     <div
-      v-if="hasPosts && currentPost"
+      v-if="hasPosts && currentPost && isMounted"
       class="notice-board-wrap__article sakura-card"
       @mouseenter="onArticleMouseEnter"
       @mouseleave="onArticleMouseLeave"

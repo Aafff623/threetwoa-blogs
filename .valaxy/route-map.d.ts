@@ -129,9 +129,37 @@ declare module 'vue-router/auto-routes' {
       { page: ParamValue<false> },
       | never
     >,
+    '/posts/ai-workflow': RouteRecordInfo<
+      '/posts/ai-workflow',
+      '/posts/ai-workflow',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/code-less-architect-more': RouteRecordInfo<
+      '/posts/code-less-architect-more',
+      '/posts/code-less-architect-more',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/digital-garden-notes': RouteRecordInfo<
+      '/posts/digital-garden-notes',
+      '/posts/digital-garden-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/hello-valaxy': RouteRecordInfo<
       '/posts/hello-valaxy',
       '/posts/hello-valaxy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/mascot-intro': RouteRecordInfo<
+      '/posts/mascot-intro',
+      '/posts/mascot-intro',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -275,9 +303,41 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | 'page'
     }
+    'pages/posts/ai-workflow.md': {
+      routes:
+        | '/posts/ai-workflow'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/code-less-architect-more.md': {
+      routes:
+        | '/posts/code-less-architect-more'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/digital-garden-notes.md': {
+      routes:
+        | '/posts/digital-garden-notes'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'pages/posts/hello-valaxy.md': {
       routes:
         | '/posts/hello-valaxy'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/mascot-intro.md': {
+      routes:
+        | '/posts/mascot-intro'
       views:
         | never
       pathParamNames:
