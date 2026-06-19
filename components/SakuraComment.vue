@@ -1,11 +1,14 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const containerRef = ref<HTMLElement>()
+let injected = false
 
-onMounted(() => {
-  if (!containerRef.value)
+watchEffect(() => {
+  const el = containerRef.value
+  if (!el || injected)
     return
+  injected = true
 
   const script = document.createElement('script')
   script.src = 'https://giscus.app/client.js'
@@ -24,7 +27,7 @@ onMounted(() => {
   script.crossOrigin = 'anonymous'
   script.async = true
 
-  containerRef.value.appendChild(script)
+  el.appendChild(script)
 })
 </script>
 
