@@ -1,6 +1,5 @@
 // import type { UserThemeConfig } from 'valaxy-theme-sakura'
 import { defineValaxyConfig } from 'valaxy'
-import { addonTwikoo } from 'valaxy-addon-twikoo'
 import { vaFoucLoader } from './plugins/va-fouc-loader'
 import { albumWebdavConfigPlugin } from './plugins/album-webdav-config'
 import { albumWebdavProxy } from './plugins/album-webdav-proxy'
@@ -147,14 +146,6 @@ export default defineValaxyConfig({
       maxDuration: 5000,
     },
   },
-
-  addons: [
-    addonTwikoo({
-      envId: 'threetwoa-blogs-d4fre2hgf90aa714',
-      region: 'ap-shanghai',
-      lang: 'zh-CN',
-    }),
-  ],
 
   vite: {
     plugins: [vaFoucLoader({

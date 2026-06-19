@@ -14,9 +14,6 @@ importers:
       valaxy:
         specifier: 0.28.11
         version: 0.28.11(@babel/parser@7.29.7)(@types/markdown-it@14.1.2)(@types/node@25.9.3)(@vue/compiler-dom@3.5.38)(axios@1.18.0)(eslint@10.5.0(jiti@2.7.0))(typescript@5.9.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.38)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3)))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.38(typescript@5.9.3)))(vue@3.5.38(typescript@5.9.3))(yaml@2.9.0)
-      valaxy-addon-twikoo:
-        specifier: ^0.0.4
-        version: 0.0.4(valaxy@0.28.11(@babel/parser@7.29.7)(@types/markdown-it@14.1.2)(@types/node@25.9.3)(@vue/compiler-dom@3.5.38)(axios@1.18.0)(eslint@10.5.0(jiti@2.7.0))(typescript@5.9.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.38)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3)))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.38(typescript@5.9.3)))(vue@3.5.38(typescript@5.9.3))(yaml@2.9.0))
       valaxy-theme-sakura:
         specifier: latest
         version: 0.10.2(valaxy-addon-hitokoto@0.0.1)(valaxy-addon-vercount@0.0.6)(vue@3.5.38(typescript@5.9.3))
@@ -3279,11 +3276,6 @@ packages:
 
   valaxy-addon-hitokoto@0.0.1:
     resolution: {integrity: sha512-N+1dl3gwxeoTraT+r7gvNfTUHIjapBNHXj/urILdKQFfji++s7ELqeCNoyyOLUpvLJJOPSfObkJ9MKDsfCm8FA==}
-
-  valaxy-addon-twikoo@0.0.4:
-    resolution: {integrity: sha512-HeifKvvrrRfW+Z0qmrrNEm6nkFFXPyk2S5RP+i961m7pSJjhsr3NRzVjlku3J6PA5FfbqDk0OL1wUmeKbjImfw==}
-    peerDependencies:
-      valaxy: '>=0.22'
 
   valaxy-addon-vercount@0.0.6:
     resolution: {integrity: sha512-FqxULU81LofkpSvAzxXmdF4utV3tnKzEKAGYSGyV+i8cYJcf1s+4mbM3PtgYEeP5anLzXBAA/e4+pc0Z0h+Gbw==}
@@ -6848,10 +6840,6 @@ snapshots:
   uuid@14.0.0: {}
 
   valaxy-addon-hitokoto@0.0.1: {}
-
-  valaxy-addon-twikoo@0.0.4(valaxy@0.28.11(@babel/parser@7.29.7)(@types/markdown-it@14.1.2)(@types/node@25.9.3)(@vue/compiler-dom@3.5.38)(axios@1.18.0)(eslint@10.5.0(jiti@2.7.0))(typescript@5.9.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.38)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3)))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.38(typescript@5.9.3)))(vue@3.5.38(typescript@5.9.3))(yaml@2.9.0)):
-    dependencies:
-      valaxy: 0.28.11(@babel/parser@7.29.7)(@types/markdown-it@14.1.2)(@types/node@25.9.3)(@vue/compiler-dom@3.5.38)(axios@1.18.0)(eslint@10.5.0(jiti@2.7.0))(typescript@5.9.3)(vue-router@5.1.0(@vue/compiler-sfc@3.5.38)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.38(typescript@5.9.3)))(vite@8.0.16(@types/node@25.9.3)(jiti@2.7.0)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.38(typescript@5.9.3)))(vue@3.5.38(typescript@5.9.3))(yaml@2.9.0)
 
   valaxy-addon-vercount@0.0.6:
     dependencies:
