@@ -1,40 +1,24 @@
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
-
-const containerRef = ref<HTMLElement>()
-let injected = false
-
-watchEffect(() => {
-  const el = containerRef.value
-  if (!el || injected)
-    return
-  injected = true
-
-  const script = document.createElement('script')
-  script.src = 'https://giscus.app/client.js'
-  script.setAttribute('data-repo', 'Aafff623/threetwoa-blogs')
-  script.setAttribute('data-repo-id', 'R_kgDOS-UR5w')
-  script.setAttribute('data-category', 'Announcements')
-  script.setAttribute('data-category-id', 'DIC_kwDOS-UR584C_dOM')
-  script.setAttribute('data-mapping', 'pathname')
-  script.setAttribute('data-strict', '0')
-  script.setAttribute('data-reactions-enabled', '1')
-  script.setAttribute('data-emit-metadata', '0')
-  script.setAttribute('data-input-position', 'bottom')
-  script.setAttribute('data-theme', 'preferred_color_scheme')
-  script.setAttribute('data-lang', 'zh-CN')
-  script.setAttribute('data-loading', 'lazy')
-  script.crossOrigin = 'anonymous'
-  script.async = true
-
-  el.appendChild(script)
-})
+import Giscus from '@giscus/vue'
 </script>
 
 <template>
   <ClientOnly>
     <SakuraCard w="full" class="sakura-comment" mt-6>
-      <div ref="containerRef" class="giscus" />
+      <Giscus
+        repo="Aafff623/threetwoa-blogs"
+        repo-id="R_kgDOS-UR5w"
+        category="Announcements"
+        category-id="DIC_kwDOS-UR584C_dOM"
+        mapping="pathname"
+        strict="0"
+        reactions-enabled="1"
+        emit-metadata="0"
+        input-position="bottom"
+        theme="preferred_color_scheme"
+        lang="zh-CN"
+        loading="lazy"
+      />
     </SakuraCard>
   </ClientOnly>
 </template>
