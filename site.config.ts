@@ -46,4 +46,9 @@ export default defineSiteConfig({
   sponsor: {
     enable: false,
   },
+
+  // 开启评论（由 valaxy-addon-twikoo 提供）
+  comment: {
+    enable: true,
+  },
 })
