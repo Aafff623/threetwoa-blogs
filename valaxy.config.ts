@@ -7,13 +7,13 @@ import siteConfig from './site.config'
 
 // add icons what you will need
 const safelist = [
-  'i-ri-home-line',
-  'i-ri-compass-3-line',
-  'i-ri-archive-line',
-  'i-ri-folder-2-line',
-  'i-ri-price-tag-3-line',
-  'i-ri-user-smile-line',
-  'i-ri-gallery-line',
+  'i-ant-design:home-filled',
+  'i-ant-design:compass-filled',
+  'i-ant-design:container-filled',
+  'i-ant-design:appstore-filled',
+  'i-ant-design:tags-filled',
+  'i-ant-design:idcard-filled',
+  'i-ant-design:picture-filled',
   'i-fa-file-text-o',
   'i-mdi-access-time',
 ]
@@ -95,37 +95,37 @@ export default defineValaxyConfig({
       {
         text: '首页',
         link: '/',
-        icon: 'i-ri-home-line',
+        icon: 'i-ant-design:home-filled',
       },
       {
         text: '归档',
         link: '/archives',
-        icon: 'i-ri-archive-line',
+        icon: 'i-ant-design:container-filled',
       },
       {
         text: '分类',
         link: '/categories',
-        icon: 'i-ri-folder-2-line',
+        icon: 'i-ant-design:appstore-filled',
       },
       {
         text: '标签',
         link: '/tags',
-        icon: 'i-ri-price-tag-3-line',
+        icon: 'i-ant-design:tags-filled',
       },
       {
         text: '相册',
         link: '/gallery',
-        icon: 'i-ri-gallery-line',
+        icon: 'i-ant-design:picture-filled',
       },
       {
         text: '导航',
         link: '/navigation',
-        icon: 'i-ri-compass-3-line',
+        icon: 'i-ant-design:compass-filled',
       },
       {
         text: '关于',
         link: '/about',
-        icon: 'i-ri-user-smile-line',
+        icon: 'i-ant-design:idcard-filled',
       },
     ],
 
