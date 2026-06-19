@@ -47,7 +47,7 @@ export default defineSiteConfig({
     enable: false,
   },
 
-  // 开启评论（由 valaxy-addon-twikoo 提供）
+  // 开启评论（由 Giscus + GitHub Discussions 提供）
   comment: {
     enable: true,
   },
