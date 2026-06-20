@@ -13,7 +13,7 @@ tags:
   - GitHub Issues
   - Review
 description: 介绍 Matt Pocock 风格的 Agentic Coding 工作流：从想法、对齐、PRD、Issues、分类、TDD 到 Review 与提交的完整流程。
-cover: https://pub-7e1dd61bb508406fb8397a36b63ecb3b.r2.dev/covers/2026/06/matt-pocock-workflow/matt-pocock-workflow.png
+cover: https://pub-7e1dd61bb508406fb8397a36b63ecb3b.r2.dev/covers/2026/06/matt-pocock-workflow/sakura-digital-garden-hero.png
 ---
 
 ## 核心 Workflow：7 个阶段
