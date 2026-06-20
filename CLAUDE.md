@@ -120,9 +120,11 @@ docker build . -t your-valaxy-blog-name:latest
 
 ## Agent skills（Matt Pocock 工作流）
 
-本仓库使用本地 markdown issue tracker。相关配置见：
+本仓库使用 GitHub Issues 作为 issue tracker，通过 `gh` CLI 管理。相关配置见：
 
 - `docs/agents/issue-tracker.md` — issue tracker 约定
 - `docs/agents/triage-labels.md` — 五个 triage 角色映射
 - `docs/agents/domain.md` — 领域文档消费规则
+
+Domain docs 采用单上下文布局：根目录 `CONTEXT.md` + `docs/adr/`。
 
