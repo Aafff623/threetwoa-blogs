@@ -213,11 +213,20 @@ pnpm serve
 | 文档 | 说明 |
 | ---- | ---- |
 | `CLAUDE.md` | 项目概述、常用命令、架构约定、部署说明 |
+| `docs/image-assets-guide.md` | 图片资源管理规范：R2 目录结构、命名规则、上传脚本用法 |
+| `.claude/skills/publish-obsidian-post.md` | 从 Obsidian 知识库发布博客文章的完整流程 |
+| `.claude/skills/upload-image-to-r2.md` | 单张图片上传到 Cloudflare R2 的 Skill |
 | `docs/agents/issue-tracker.md` | 本地 markdown issue tracker 约定 |
 | `docs/agents/triage-labels.md` | 五个 triage 角色映射 |
 | `docs/agents/domain.md` | 领域文档消费规则 |
 | `docs/tutorials/` | 各阶段美化教程笔记 |
 | `docs/adr/` | 架构决策记录 |
+
+### 图片资源管理
+
+博客图片托管在 **Cloudflare R2**（bucket: `threetwoa-blog-assets`），通过 `scripts/upload-to-r2.ps1` 上传。
+
+文章配图按 `blog/YYYY/MM/<post-slug>/image.png` 组织，上传后返回 Markdown 链接直接插入文章。详见 [`docs/image-assets-guide.md`](docs/image-assets-guide.md)。
 
 <p align="right">(<a href="#top">回到顶部</a>)</p>
 

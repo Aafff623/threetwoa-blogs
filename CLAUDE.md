@@ -65,6 +65,52 @@ docker build . -t your-valaxy-blog-name:latest
   - `valaxy.config.ts`：Valaxy 框架配置（主题、UnoCSS safelist、插件、构建选项）。
   - `site.config.ts`：站点元数据（url、lang、title、author、description、社交链接、search、sponsor）。
 
+## 从 Obsidian 发布文章
+
+博客文章在 Obsidian 知识库（`D:\OneDrive\Desktop\Notes\threetwoa_ob`）中以草稿形式编写，通过 `.claude/skills/publish-obsidian-post.md` skill 发布到本仓库的 `pages/posts/`。
+
+**仓库分工：**
+
+| 仓库 | 角色 | 可见性 |
+|---|---|---|
+| `threetwoa-ob-brain` | Obsidian 知识库 / 草稿源站 | Private |
+| `threetwoa-blogs` | 正式发布站点 | Public |
+| `threetwoa-blog-assets` | 配图与资源托管（Cloudflare R2） | Public-read |
+
+**发布流程：**
+
+1. 在 Obsidian 的 `Blog/Drafts/<article-folder>/` 下创建 `article.md` 和 `assets/` 配图。
+2. 用户触发发布（如"把这篇发到博客"）。
+3. 读取草稿，补全/规范化 frontmatter（title、date、categories、tags、description）。
+4. 将 `![[image.png]]` 里的配图上传到 R2，替换为标准 Markdown 图片链接。
+5. 写入 `pages/posts/<slug>.md` 并提交到博客仓库。
+
+详见 `.claude/skills/publish-obsidian-post.md`。
+
+## 图片资源管理
+
+博客图片托管在 **Cloudflare R2**（bucket: `threetwoa-blog-assets`），通过 **rclone** 上传。处理图片上传时：
+
+1. 单张图片上传优先加载 `.claude/skills/upload-image-to-r2.md` skill。
+2. 从 Obsidian 发布文章时优先加载 `.claude/skills/publish-obsidian-post.md` skill。
+3. 按 `docs/image-assets-guide.md` 的目录结构存放：
+   - 文章配图：`blog/YYYY/MM/<post-slug>/image.png`
+   - 封面图：`covers/YYYY/MM/<post-slug>/image.png`
+   - 吉祥物：`mascot/`
+   - 站点资源：`assets/`
+   - 页面配图：`pages/<page-name>/`
+   - 临时图：`draft/`
+3. 文件名和 slug 自动规范化：小写、空格变连字符、移除特殊字符。
+4. 上传后返回 Markdown 引用，直接插入文章。
+
+上传脚本：`scripts/upload-to-r2.ps1`
+
+示例：
+
+```powershell
+.\scripts\upload-to-r2.ps1 -FilePath "D:\图片\saber.png" -Type blog -Slug "fate-stay-night-review"
+```
+
 ## 部署
 
 - `.github/workflows/gh-pages.yml`：在推送到 `main`、`master` 或 `valaxy` 分支时自动构建，并将 `dist/` 部署到 GitHub Pages。
