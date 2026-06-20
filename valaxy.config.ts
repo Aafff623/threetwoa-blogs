@@ -131,7 +131,7 @@ export default defineValaxyConfig({
 
     navbarOptions: {
       title: ['threetwoa', 'digital', 'garden'],
-      tools: ['toggleDark', 'toggleLocale', 'search'],
+      tools: ['toggleDark', 'search'],
     },
 
     footer: {
