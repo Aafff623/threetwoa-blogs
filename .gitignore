@@ -40,3 +40,6 @@ public/atom.xml
 public/feed.json
 
 .vercel
+
+# codegraph local tooling
+.codegraph/
