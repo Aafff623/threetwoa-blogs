@@ -52,7 +52,7 @@ export default defineValaxyConfig({
     hero: {
       title: "threetwoa's digital garden",
       motto: '记录代码、架构与 AI 工作流的数字花园。Code less, Architect more.',
-      urls: ['/images/hero/hero-bg.jpg'],
+      urls: ['https://pub-7e1dd61bb508406fb8397a36b63ecb3b.r2.dev/assets/preview-hero.png'],
       randomUrls: false,
     },
 
