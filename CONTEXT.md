@@ -1,6 +1,6 @@
 # Valaxy Blog Context
 
-This context covers the Valaxy static blog and the upcoming local search feature. It defines the domain language used when discussing the site, its content, and the search capability.
+This context covers the Valaxy static blog, including its local search capability and content publishing workflow. It defines the domain language used when discussing the site, its content, and its features.
 
 ## Language
 
@@ -109,5 +109,6 @@ _Avoid_: translation file, lang file
 
 ## Open questions
 
-- The site title, author, description, and social links are still template defaults and need personalization.
-- Search is planned but not yet enabled.
+- The site title, author, description, and social links have been personalized; review periodically as the site evolves.
+- Search is enabled via Fuse and the `/search` page is active; future work may include search highlight and recent queries.
+- The content publishing workflow (Obsidian → R2 → blog post) is established; future work may include scheduled publishing and content series.
