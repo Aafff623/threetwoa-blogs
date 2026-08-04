@@ -1,130 +1,90 @@
 # CLAUDE.md
 
-本文件为 Claude Code（claude.ai/code）提供在本仓库中工作的指导。
+> **Output Style**: `humanizer-output-style` — see `~/.claude/skills/humanizer-output-style/SKILL.md`  
+> **项目语气覆盖**：`docs/agents/voice.md`  
+> **Windows Rules / Answer Format / AGENTS 镜像 / commit-history**：见 `.cursor/rules/*.mdc`  
+> 跨工具硬约束与路径表以根 `AGENTS.md` 为准；本文件补充 Claude Code 维护协议与本仓操作细节。
+
+## 三层加载
+
+1. 根 `AGENTS.md`（门禁 · 事实源表 · MDC）  
+2. 本文件（命令 · 架构习惯 · 发布 skill）  
+3. `CONTEXT.md` + `LANGUAGES.md` + 相关 ADR / handoff  
 
 ## 项目概述
 
-这是一个使用 Sakura 主题（`valaxy-theme-sakura`）的 [Valaxy](https://valaxy.site) 静态博客。它基于 Vite/Vue，采用文件系统路由、组件自动注册，并使用 UnoCSS。配置分为两个文件：
+使用 Sakura 主题（`valaxy-theme-sakura`）的 [Valaxy](https://valaxy.site) 静态博客。Vite/Vue、文件系统路由、组件自动注册、UnoCSS。配置分两文件：
 
-- `valaxy.config.ts`：框架/主题配置（主题名称、UnoCSS safelist、插件、构建选项等）。
-- `site.config.ts`：站点级元数据（URL、语言、标题、作者、描述、社交链接、搜索、赞助等）。
+- `valaxy.config.ts`：框架/主题（主题名、safelist、插件、构建）
+- `site.config.ts`：站点元数据（url、lang、title、author、社交、search、sponsor）
 
 ## 常用命令
 
-本项目使用 `pnpm`。`.npmrc` 已启用 `shamefully-hoist` 并关闭严格对等依赖检查。
-
-安装依赖：
+包管理：`pnpm`（`.npmrc`：`shamefully-hoist`，关闭严格 peer）。
 
 ```bash
 pnpm install
-```
-
-启动开发服务器（Valaxy CLI，默认 http://localhost:4859）：
-
-```bash
-pnpm dev
-```
-
-构建站点。默认使用 SSG，输出到 `dist/`：
-
-```bash
-pnpm build
-pnpm build:ssg   # 显式 SSG 构建
-pnpm build:spa   # SPA 构建
-```
-
-预览生产构建：
-
-```bash
+pnpm dev          # http://localhost:4859
+pnpm build        # SSG → dist/（scripts/build-ssg.mjs 包装）
+pnpm build:ssg
+pnpm build:spa
+pnpm build:ssg:raw
 pnpm serve
-```
-
-生成 RSS 订阅：
-
-```bash
 pnpm rss
+pnpm fuse
 ```
 
-当前未配置 lint 或 test 脚本。
+当前无 lint / test 脚本。Docker：`docker build . -t your-valaxy-blog-name:latest`。
 
-构建 Docker 镜像：
-
-```bash
-docker build . -t your-valaxy-blog-name:latest
-```
+README 预览壳：`python -m http.server 8094` → `http://127.0.0.1:8094/preview-readme.html`（须 HTTP，勿 `file://`）。
 
 ## 架构与约定
 
-- **文件系统路由**：`pages/` 下的文件会自动生成路由。`pages/posts/*.md` 会被识别为博客文章；`about/`、`archives/`、`categories/`、`links/`、`tags/` 等文件夹为特殊/列表页面。生成的路由类型定义在 `.valaxy/route-map.d.ts` 中。
-- **布局**：主题提供了 `SakuraHomeLayout`、`SakuraPost`、`SakuraArchivesLayout`、`SakuraTagsLayout` 等布局。你可以在 `layouts/` 中放置 Vue 组件进行覆盖，或在 Markdown 的 front matter 中设置 `layout: xxx`。
-- **组件自动注册**：`components/` 中的组件通过 `unplugin-vue-components` 按需自动注册。主题组件也全局可用，当前生成的注册表见 `.valaxy/components.d.ts`。
-- **样式**：Valaxy 会自动加载 `styles/index.scss` 和 `styles/css-vars.scss`。自定义 CSS 和 CSS 变量写在这里；如需拆分文件，可从 `styles/index.scss` 中导入。
-- **图标**：使用 Iconify 类名，例如 `i-ri-home-line`。如果动态图标未渲染，把对应的类名添加到 `valaxy.config.ts` 中的 `safelist` 数组。
-- **国际化**：`locales/en.yml` 和 `locales/zh-CN.yml` 用于覆盖主题翻译。
-- **配置分工**：
-  - `valaxy.config.ts`：Valaxy 框架配置（主题、UnoCSS safelist、插件、构建选项）。
-  - `site.config.ts`：站点元数据（url、lang、title、author、description、社交链接、search、sponsor）。
+- **文件系统路由**：`pages/` → 路由；`pages/posts/*.md` 为 Post；特殊页如 `archives/`、`categories/`、`tags/`、`links/`、`gallery/`、`navigation/`、`search/`。类型见 `.valaxy/route-map.d.ts`。
+- **布局覆盖**：`layouts/` 或 front matter `layout: xxx`。
+- **组件自动注册**：`components/` + 主题组件；见 `.valaxy/components.d.ts`。
+- **样式**：`styles/index.scss` · `styles/css-vars.scss`。
+- **图标**：Iconify（如 `i-ri-home-line`）；动态类名必须进 `valaxy.config.ts` 的 `safelist`。
+- **国际化**：`locales/en.yml` · `locales/zh-CN.yml`。
+
+## Agent skills
+
+### Issue tracker
+
+本地 Markdown：`.scratch/<feature>/`。见 `docs/agents/issue-tracker.md`。
+
+### Triage labels
+
+五种 canonical 标签。见 `docs/agents/triage-labels.md`。
+
+### Domain docs
+
+单上下文：`CONTEXT.md` + `docs/adr/`。见 `docs/agents/domain.md`。
 
 ## 从 Obsidian 发布文章
 
-博客文章在 Obsidian 知识库（`D:\OneDrive\Desktop\Notes\threetwoa_ob`）中以草稿形式编写，通过 `.claude/skills/publish-obsidian-post.md` skill 发布到本仓库的 `pages/posts/`。
-
-**仓库分工：**
+草稿源：Obsidian 知识库（本机路径勿写入对外文档唯一说明）。Skill：`.claude/skills/publish-obsidian-post.md`。
 
 | 仓库 | 角色 | 可见性 |
-|---|---|---|
-| `threetwoa-ob-brain` | Obsidian 知识库 / 草稿源站 | Private |
+|------|------|--------|
+| `threetwoa-ob-brain` | Obsidian 草稿源 | Private |
 | `threetwoa-blogs` | 正式发布站点 | Public |
-| `threetwoa-blog-assets` | 配图与资源托管（Cloudflare R2） | Public-read |
+| `threetwoa-blog-assets` | R2 配图托管 | Public-read |
 
-**发布流程：**
-
-1. 在 Obsidian 的 `Blog/Drafts/<article-folder>/` 下创建 `article.md` 和 `assets/` 配图。
-2. 用户触发发布（如"把这篇发到博客"）。
-3. 读取草稿，补全/规范化 frontmatter（title、date、categories、tags、description）。
-4. 将 `![[image.png]]` 里的配图上传到 R2，替换为标准 Markdown 图片链接。
-5. 写入 `pages/posts/<slug>.md` 并提交到博客仓库。
-
-详见 `.claude/skills/publish-obsidian-post.md`。
+流程：Drafts → 规范化 frontmatter → 配图上 R2 → `pages/posts/<slug>.md` → CI。
 
 ## 图片资源管理
 
-博客图片托管在 **Cloudflare R2**（bucket: `threetwoa-blog-assets`），通过 **rclone** 上传。处理图片上传时：
-
-1. 单张图片上传优先加载 `.claude/skills/upload-image-to-r2.md` skill。
-2. 从 Obsidian 发布文章时优先加载 `.claude/skills/publish-obsidian-post.md` skill。
-3. 按 `docs/image-assets-guide.md` 的目录结构存放：
-   - 文章配图：`blog/YYYY/MM/<post-slug>/image.png`
-   - 封面图：`covers/YYYY/MM/<post-slug>/image.png`
-   - 吉祥物：`mascot/`
-   - 站点资源：`assets/`
-   - 页面配图：`pages/<page-name>/`
-   - 临时图：`draft/`
-3. 文件名和 slug 自动规范化：小写、空格变连字符、移除特殊字符。
-4. 上传后返回 Markdown 引用，直接插入文章。
-
-上传脚本：`scripts/upload-to-r2.ps1`
-
-示例：
-
-```powershell
-.\scripts\upload-to-r2.ps1 -FilePath "D:\图片\saber.png" -Type blog -Slug "fate-stay-night-review"
-```
+Cloudflare R2（bucket: `threetwoa-blog-assets`）+ rclone。Skill：`.claude/skills/upload-image-to-r2.md`。目录约定：`docs/image-assets-guide.md`。脚本：`scripts/upload-to-r2.ps1`。
 
 ## 部署
 
-- `.github/workflows/gh-pages.yml`：在推送到 `main`、`master` 或 `valaxy` 分支时自动构建，并将 `dist/` 部署到 GitHub Pages。
-- `netlify.toml`：执行 `pnpm run build` 并发布 `dist/`，同时设置 Node 20 和 SPA fallback 重定向。
-- `vercel.json`：启用 clean URLs。
-- `Dockerfile`：使用 pnpm 构建站点，并通过 nginx 提供服务。
+- `.github/workflows/gh-pages.yml`：推送 `main` / `master` / `valaxy` 构建部署（注意：workflow 仍可能用 npm，与 pnpm 仓不一致，改前先 ADR / Issue）
+- `netlify.toml` · `vercel.json` · `Dockerfile` + `nginx.conf`
 
-## Agent skills（Matt Pocock 工作流）
+## 偏好归档
 
-本仓库使用 GitHub Issues 作为 issue tracker，通过 `gh` CLI 管理。相关配置见：
-
-- `docs/agents/issue-tracker.md` — issue tracker 约定
-- `docs/agents/triage-labels.md` — 五个 triage 角色映射
-- `docs/agents/domain.md` — 领域文档消费规则
-
-Domain docs 采用单上下文布局：根目录 `CONTEXT.md` + `docs/adr/`。
-
+- 领域词以 `CONTEXT.md` 为准；任务流词以 `LANGUAGES.md` 为准  
+- 不写 `docs/agents/language.md` / `context.md`  
+- init / README 配图落 `assets/images/readme/`  
+- 业务功能须经 PRD 批准后再改 `components/` / `pages/` 等产品代码  

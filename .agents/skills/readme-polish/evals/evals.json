@@ -1,0 +1,30 @@
+{
+  "skill_name": "readme-polish",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "为当前这个 Python FastAPI 项目写一个 README，项目叫 AgentCFO，是一个 AI 驱动的 CFO 助手，帮助创业团队自动分析现金流、生成财务报表、对接银行 API。技术栈：Python 3.12 + FastAPI + PostgreSQL + React + shadcn/ui。项目文件在 fixture/ 目录。",
+      "expected_output": "生成一个符合 AgentCFO 风格的 README.md，包含核心模块（Header/Why/Features/Demo/Quick Start/Architecture/Docs/Team/License），徽章分组合理，截图路径指向 assets/images/readme/，并包含可验证的 curl 示例。",
+      "files": ["fixture/pyproject.toml", "fixture/app/main.py", "fixture/frontend/package.json", "fixture/docs/ARCHITECTURE.md"],
+      "assertions": [
+        "README 顶部包含项目名、英文定位、中文解释和 Banner 占位",
+        "包含核心模块章节：为什么需要、功能、演示、快速开始、架构、文档、团队、许可证",
+        "徽章使用 shields.io 且按语义分组",
+        "快速开始包含可直接复制的命令和验证 curl",
+        "没有夸张营销词汇"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "打磨一下这个 repo 的 README.md，让它更规范专业。",
+      "expected_output": "读取现有 README.md，标记缺失模块，保留有效内容，按 AgentCFO 风格补全核心模块和合适的可选模块。",
+      "files": ["fixture/README.md"],
+      "assertions": [
+        "先读取现有 README.md",
+        "输出包含新增/修改模块的清单",
+        "保留项目原有故事和有效内容",
+        "最终 README 包含 back-to-top 锚点和链接"
+      ]
+    }
+  ]
+}
