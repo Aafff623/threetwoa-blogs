@@ -2,11 +2,12 @@
 
 ## Status
 
-Accepted
+Accepted · **Implemented**（`site.config.ts`：`search.enable: true` · `provider: 'fuse'`）
 
 ## Context
 
-`threetwoa-blogs` currently has search disabled (`search.enable: false` in `site.config.ts`). Readers cannot search posts or pages. As the blog grows, discoverability will degrade.
+决策当时：`threetwoa-blogs` 搜索曾关闭（`search.enable: false`）。读者无法检索 Post / Page；随着内容增长，可发现性会变差。  
+（抽检日 2026-08-05：实现已落地；下文 Context 保留决策时态，勿再读成「现状仍关闭」。）
 
 We need to choose a search provider. The main candidates are:
 

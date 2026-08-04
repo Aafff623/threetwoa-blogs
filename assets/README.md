@@ -33,4 +33,5 @@ assets/
 - 单产品博客：**省略 Preview Gallery**；以 **Showcase**（真机截图）为主。  
 - 六张说明图已按契约落盘（`banner|features|architecture|tech-stack|workflow|structure.png`）；旧 `banner.jpg` 保留对照。  
 - Showcase 来自线上/本地实机截图，**禁止**用说明图冒充。  
-- 出图：MiniMax `text_to_image` 若鉴权失败则回退 Cursor `GenerateImage`。
+- 出图：MiniMax `text_to_image` 若鉴权失败则回退 Cursor `GenerateImage`。  
+- **2026-08-05 抽检**：`banner` / `features` / `architecture` 曾错引用他仓图，已按 prompts 重出；`tech-stack` / `workflow` / `structure` 抽检合格保留。

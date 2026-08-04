@@ -186,7 +186,8 @@ export default function ThreetwoaBlogsDeepAnalysis() {
           <CardHeader>文档与 Agent 体系</CardHeader>
           <CardBody>
             <Text size="small">
-              README / CLAUDE.md / AGENTS.md / CONTEXT.md / LANGUAGE.md · docs/adr · docs/tutorials（Stage 1–10）· docs/agents（Matt Pocock 工作流）· .claude/skills（Obsidian 发布、R2 上传）
+              {/* project-init Full 后：LANGUAGE.md 已迁 LANGUAGES.md；含 MDC / preview-readme / 契约图 */}
+              README / CLAUDE.md / AGENTS.md / CONTEXT.md / LANGUAGES.md · docs/adr · docs/tutorials（Stage 1–10）· docs/agents（Matt Pocock）· .claude/skills（Obsidian / R2）· project-init Full ✅
             </Text>
           </CardBody>
         </Card>
@@ -290,7 +291,7 @@ export default function ThreetwoaBlogsDeepAnalysis() {
           </Stack>
           <Stack gap={8}>
             <H3>工程与文档</H3>
-            <Text size="small">· ADR + CONTEXT/LANGUAGE + tutorials，Agent 友好</Text>
+            <Text size="small">· ADR + CONTEXT/LANGUAGES + tutorials，Agent 友好</Text>
             <Text size="small">· build-ssg.mjs：针对 Valaxy SSG 挂起的工程化兜底（心跳、超时、dist 内容检测）</Text>
             <Text size="small">· 多平台部署清单齐全（GH Pages / Vercel / Netlify / Docker+nginx）</Text>
           </Stack>

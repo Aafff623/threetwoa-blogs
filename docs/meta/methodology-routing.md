@@ -2,7 +2,7 @@
 
 本文件记录本仓库使用的 Matt Pocock skills 中各 `/` 命令会触发什么、产出什么文档、以及这些文档应该放在哪里。
 
-> 来源：`mattpocock/skills` 官方模板。`LANGUAGE.md` 在新版中已合并进 `CONTEXT.md`，不再单独维护。
+> 来源：`mattpocock/skills` 官方模板。旧名 `LANGUAGE.md` 已废弃：领域术语 → 根 `CONTEXT.md`；任务流共享用词 → 根 `LANGUAGES.md`（project-init §单一事实源）。
 
 ---
 
@@ -119,5 +119,5 @@
   1. 难撤销
   2. 没有上下文会令人意外
   3. 存在真实取舍
-- `.scratch/` 用于本地 markdown issue tracker；有 GitHub remote 时优先用 GitHub Issues。
-- `LANGUAGE.md` 已废弃，所有领域语言统一进 `CONTEXT.md`。
+- Issue tracker 默认本地 `.scratch/<feature>/`（见 `docs/agents/issue-tracker.md`）；仅当用户明确要求时再用 GitHub Issues。
+- 旧 `LANGUAGE.md` 已废弃：领域词 → `CONTEXT.md`；任务流词 → `LANGUAGES.md`。

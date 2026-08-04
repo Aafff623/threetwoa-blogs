@@ -25,9 +25,9 @@ Valaxy + Sakura 增强静态博客模板：可视化归档、首页动态、灯�
 
 | 文件 | 来源 | 状态 |
 |------|------|------|
-| banner.png | GenerateImage（MiniMax API key 无效回退） | ✅ |
-| features.png | GenerateImage 回退 | ✅ |
-| architecture.png | GenerateImage 回退 | ✅ |
+| banner.png | 2026-08-05 抽检：原图错成「My House Server」→ MiniMax 无效后 GenerateImage 重出 | ✅ |
+| features.png | 2026-08-05 抽检：原图错成 Sa-Token/API 能力 → GenerateImage 重出 | ✅ |
+| architecture.png | 2026-08-05 抽检：原图错成 Spring Boot/MySQL → GenerateImage 重出 | ✅ |
 | tech-stack.png | GenerateImage 回退 | ✅ |
 | workflow.png | GenerateImage 回退 | ✅ |
 | structure.png | GenerateImage 回退 | ✅ |
